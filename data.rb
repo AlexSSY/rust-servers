@@ -1,36 +1,30 @@
 require "dry-initializer"
 require "dry-struct"
 require 'dotenv/load'
+require "net/http"
+require "uri"
 require_relative "domain"
 
 Types = Dry.Types()
 
-class Location < Dry::Struct
-  attribute :latitude, Types::String
-  attribute :longitude, Types::String
-end
-
 class WeatherDataSource
   extend Dry::Initializer
-
   param :location
-
-  def today
-    raise NotImplementedError
-  end
 end
 
-class WeatherInfoDto < Dry::Struct
+class OpenMeteoDto < Dry::Struct
   attribute :city_name, Types::String
-  attribute :temparature, Types::String
+  attribute :temperature, Types::String
 
   def to_domain
     RustServerModel.new(name:, online:)
   end
 end
 
-class OpenMeteoSource < WeatherDataSource
+class OpenMeteoDS < WeatherDataSource
   def today
+    uri = URI::HTTPS.open
+    Net::HTTP.get("https://google.com/")
   end
 
   private

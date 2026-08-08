@@ -46,7 +46,7 @@ DEPENDENCIES
   dotenv (~> 3.2)
   dry-initializer (~> 3.2)
   dry-operation (~> 1.1)
-  dry-struct (~> 1.8)
+  dry-struct (~> 1.8.1)
 
 BUNDLED WITH
    2.6.9

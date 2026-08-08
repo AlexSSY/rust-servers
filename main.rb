@@ -1,13 +1,22 @@
-require_relative "data"
+require_relative "domain"
+require "dry/monads"
+
+include Dry::Monads[:result]
 
 def main
-  data_source = OpenMeteoSource.new(
-    location: Location.new(latitude: "33.94535964189262", longitude: "50.204589444188336")
+  open_meteo_weather_service = OpenMeteoWeatherService.new(
+    latitude: ENV["LAT"],
+    longitude: ENV["LON"]
   )
 
-  data_source&.then { |ds|
-    puts ds.today
-  }
+  result = open_meteo_weather_service.call
+
+  case result
+  in Success[weather_model]
+    puts weather_model.to_h
+  in Failure[error]
+    puts error
+  end
 end
 
 main

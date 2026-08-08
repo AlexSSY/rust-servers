@@ -4,7 +4,7 @@ source "https://rubygems.org"
 
 # gem "rails"
 
-gem "dry-struct", "~> 1.8"
+gem "dry-struct", "~> 1.8.1"
 
 gem "dry-operation", "~> 1.1"
 
